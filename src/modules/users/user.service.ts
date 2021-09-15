@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
@@ -18,8 +18,9 @@ export class UserService {
 
   async showById(id: number): Promise<User> {
     const user = await this.userRepo.findOne(id);
-
-    delete user.password;
+    if(!user){
+      throw new UnauthorizedException(`User with ${id} is not found`);
+    }
     return user;
   } 
 
