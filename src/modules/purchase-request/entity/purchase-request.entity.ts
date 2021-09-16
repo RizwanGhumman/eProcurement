@@ -1,7 +1,8 @@
-import { BiddingRequest } from "src/modules/bidding-request/entity/bidding-request.entity";
-import { Department } from "src/modules/department/entity/department.entity";
-import { User } from "src/modules/users/entity/user.entity";
-import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BidItem } from "src/modules/bid-items/entity/bid-items.entity";
+import { Bidding } from "src/modules/bidding/entity/bidding.entity";
+import { Item } from "src/modules/item/entity/item.entity";
+import { PurchaseRequestItem } from "src/modules/purchase-request-item/entity/purchase-request-item.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('purcahse_request')
 export class PurchaseRequest extends BaseEntity{
@@ -12,30 +13,37 @@ export class PurchaseRequest extends BaseEntity{
     title: string;
 
     @Column()
-    level: string;
+    urgency: string;
+
+    @Column()
+    status: string;
 
     @Column()
     detail: string;
 
     @Column()
-    urgency: string;
-
-    @Column()
-    location: string;
-
-    @Column()
     require_date: Date;
 
     @Column()
-    po_status:string;
+    created_by: string;
 
-    @ManyToOne(()=>User, user=>user.purchase_requests)
-    user:User
+    @Column()
+    @CreateDateColumn()
+    createdAt: Date;
+  
+    @Column()
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-    @ManyToOne(()=>Department,department=>department.purchase_requests)
-    department:Department
+    @OneToMany(()=>PurchaseRequestItem,pr_req_item=>pr_req_item.purchase_req)
+    purchase_req_items:PurchaseRequestItem[]
 
-    @OneToMany(()=>BiddingRequest,bid_request=>bid_request.purchase_request)
-    bidding_requests:BiddingRequest[]
+
+    @OneToMany(()=>Bidding,bids=>bids.purchase_req)
+    bids:Bidding
+
+
+
+    
 
 }

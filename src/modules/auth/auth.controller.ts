@@ -11,10 +11,10 @@ import { NoAuth } from './guards/no-auth.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-
   @NoAuth()
-  @Post('login')
+  @Post('/login')
   async login(@Body() authLoginDto: LoginDto) {
+    console.log(authLoginDto)
     return this.authService.login(authLoginDto);
   }
 

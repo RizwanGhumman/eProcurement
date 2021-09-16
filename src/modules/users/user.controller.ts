@@ -11,8 +11,11 @@ import { UserService } from './user.service';
 @Controller('api/users')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
+  
+  @NoAuth()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto)
     return this.usersService.create(createUserDto);
   }
 

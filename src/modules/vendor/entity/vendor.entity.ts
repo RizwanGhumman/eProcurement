@@ -1,4 +1,6 @@
-import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Bidding } from "src/modules/bidding/entity/bidding.entity";
+import { Location } from "src/modules/location/entity/location.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, LoadEvent, OneToMany,OneToOne,PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "../../users/entity/user.entity";
 @Entity('vendors')
 export class Vendor extends BaseEntity{
@@ -9,14 +11,33 @@ export class Vendor extends BaseEntity{
   company_name: string;  
 
   @Column()
-  shipping_date: Date
+  shipping_address: string;
 
   @Column()
   first_contact: string; 
 
   @Column()
   second_contact: string;
+
+  @Column()
+  type: string;
+
+  @Column()
+  category: string;
+
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
   
-  @OneToOne(()=>User, user=>user.vendor)
-  user:User
+  @OneToMany(()=>Bidding, bid=>bid.vendor)
+  bids:Bidding[]
+
+  @OneToOne(()=>Location,location=>location.vendor)
+  @JoinColumn()
+  location:Location
+
 }
