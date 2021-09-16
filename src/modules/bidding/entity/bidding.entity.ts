@@ -1,6 +1,7 @@
-import { Attachment } from "src/modules/attachment/entity/attachment.entity";
-import { BiddingRequest } from "src/modules/bidding-request/entity/bidding-request.entity";
-import { BaseEntity, Column, Entity, ManyToOne,OneToOne,JoinColumn, PrimaryGeneratedColumn } from "typeorm";
+import { BidItem } from "src/modules/bid-items/entity/bid-items.entity";
+import { PurchaseRequest } from "src/modules/purchase-request/entity/purchase-request.entity";
+import { Vendor } from "src/modules/vendor/entity/vendor.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('biddings')
 export class Bidding extends BaseEntity{
@@ -17,22 +18,28 @@ export class Bidding extends BaseEntity{
     detail:string;
 
     @Column()
-    advance_amount:number;
+    advance_payment:number; 
 
     @Column()
-    pm_status:string;
+    status: string;
 
     @Column()
-    po_status:string;
-
+    @CreateDateColumn()
+    createdAt: Date;
+  
     @Column()
-    cpo_status:string;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-    @ManyToOne(()=>Attachment,attachment=>attachment.biddings)
-    attachment:Attachment
 
-    @OneToOne(()=>BiddingRequest, bid_req=>bid_req.bid)
-    @JoinColumn()
-    bid_req:BiddingRequest
+    @ManyToOne(()=>Vendor,vendor=>vendor.bids)
+    vendor:Vendor
+
+    @ManyToOne(()=>BidItem,bid_item=>bid_item.bids)
+    bid_item:BidItem
+
+
+    @ManyToOne(()=>PurchaseRequest,pr_req=>pr_req.bids)
+    purchase_req:PurchaseRequest
 
 }

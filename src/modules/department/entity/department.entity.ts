@@ -1,6 +1,5 @@
-import { DepartmentItem } from "src/modules/department-item/entity/department-item.entity";
-import { PurchaseRequest } from "src/modules/purchase-request/entity/purchase-request.entity";
-import { BaseEntity, Column, Entity,OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Location } from "src/modules/location/entity/location.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity,ManyToOne,OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "../../users/entity/user.entity";
 @Entity('departments')
 export class Department extends BaseEntity{
@@ -14,17 +13,16 @@ export class Department extends BaseEntity{
   type: string
 
   @Column()
-  total_count: number; 
+  @CreateDateColumn()
+  createdAt: Date;
 
   @Column()
-  previous_total: number;
+  @UpdateDateColumn()
+  updatedAt: Date;
   
   @OneToMany(()=>User, user=>user.department)
   users:User[]
 
-  @OneToMany(()=>DepartmentItem, department_item=>department_item.department)
-  department_item: DepartmentItem[]
-
-  @OneToMany(()=>PurchaseRequest,purchase_request=>purchase_request.department)
-  purchase_requests:PurchaseRequest[]
+  @ManyToOne(()=>Location,location=>location.departments)
+  location:Location
 }

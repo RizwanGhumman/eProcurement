@@ -10,12 +10,11 @@ import { APP_GUARD } from '@nestjs/core';
 import { VendorModule } from './modules/vendor/vendor.module';
 import { DepartmentModule } from './modules/department/department.module';
 import { ItemModule } from './modules/item/item.module';
-import { DepartmentItemModule } from './modules/department-item/department-item.module';
-import { RequestItemModule } from './modules/request-item/request-item.module';
-import { PurchaseRequestModule } from './modules/purchase-request/purchase-request.module';
-import { AttachmentModule } from './modules/attachment/attachment.module';
+import { BidItemsModule } from './modules/bid-items/bid-items.module';
+import { PurchaseRequestItemModule } from './modules/purchase-request-item/purchase-request-item.module';
+import { LocationModule } from './modules/location/location.module';
 import { BiddingModule } from './modules/bidding/bidding.module';
-import { BiddingRequestModule } from './modules/bidding-request/bidding-request.module';
+import { PurchaseRequestModule } from './modules/purchase-request/purchase-request.module';
 
 @Module({
   imports: [
@@ -26,12 +25,11 @@ import { BiddingRequestModule } from './modules/bidding-request/bidding-request.
     VendorModule,
     DepartmentModule,
     ItemModule,
-    DepartmentItemModule,
-    RequestItemModule,
-    PurchaseRequestModule,
-    AttachmentModule,
+    BidItemsModule,
+    PurchaseRequestItemModule,
+    LocationModule,
     BiddingModule,
-    BiddingRequestModule,
+    PurchaseRequestModule
   ],
   controllers: [AppController],
   providers: [
