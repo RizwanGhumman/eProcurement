@@ -5,5 +5,6 @@ export enum UserRole{
     PURCHASING_MANAGER='purchasing_manager',
     CHEIF_PURCHASING_OFFICER='cheif_purchasing_officer',
     DATA_ENTRY='data_entry',
-    VENDOR='vendor'
+    VENDOR='vendor',
+    USER='user'
 }

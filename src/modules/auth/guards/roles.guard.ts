@@ -22,7 +22,7 @@ export class RolesGuard implements CanActivate {
 
         if(userFind){
             let hasPermission:boolean=false;
-            const hasRole=()=>roles.includes(userFind.type);
+            const hasRole=()=>roles.includes(userFind.role);
             if(hasRole()){
                 hasPermission=true;
                 //console.log("Has a Role");    
