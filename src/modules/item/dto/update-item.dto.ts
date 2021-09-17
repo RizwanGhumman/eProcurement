@@ -20,5 +20,5 @@ export class UpdateItemDto{
     @ApiProperty()
     @IsOptional()
     @IsString()
-    UOM: string;
+    uom: string;
   }

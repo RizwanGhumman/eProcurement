@@ -15,7 +15,7 @@ export class Item extends BaseEntity{
     detail: string;
 
     @Column()
-    UOM: string;
+    uom: string;
 
     @Column()
     @CreateDateColumn()

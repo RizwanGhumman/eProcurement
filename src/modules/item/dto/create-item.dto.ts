@@ -19,5 +19,5 @@ export class CreateItemDto{
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
-    UOM: string;
+    uom: string;
   }
