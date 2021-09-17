@@ -9,8 +9,8 @@ import { LocationService } from '../location/location.service';
 import { Location } from '../location/entity/location.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Department,User,Location])],
+  imports: [TypeOrmModule.forFeature([Department, User, Location])],
   controllers: [DepartmentController],
-  providers: [DepartmentService,UserService,LocationService]
+  providers: [DepartmentService, UserService, LocationService],
 })
 export class DepartmentModule {}
