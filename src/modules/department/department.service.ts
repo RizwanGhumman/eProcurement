@@ -42,12 +42,15 @@ export class DepartmentService {
         try{
             const keys= Object.keys(updateDepartmentDto);
             if(keys.length>0){
-                if(keys.includes('locationId')){
+                const index=keys.findIndex(item=>item==='locationId')
+                if(index!==-1){
                     const location = await this.locationService.findById(updateDepartmentDto.locationId)
                     department.locationId = location.id;
-                    delete updateDepartmentDto.locationId
+                    // delete updateDepartmentDto.locationId
+                    keys.splice(index,1)
                 }
-            Object.keys(updateDepartmentDto).forEach((key)=>{
+                
+            keys.forEach((key)=>{
                 department[`${key}`] = updateDepartmentDto[`${key}`]
             })
             const res =  await this.departmentRepo.save(department)

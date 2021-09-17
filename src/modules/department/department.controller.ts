@@ -16,19 +16,17 @@ import { Department } from './entity/department.entity';
 export class DepartmentController {
   constructor(private readonly departmentService: DepartmentService) {}
 
-  @NoAuth()
   @Roles(UserRole.ADMIN)
   //@UseGuards(JwtAuthGuard,RolesGuard)
   @Get('/:take/:skip')
   getDepartments(@Param('take') take:number,@Param('skip') skip:number):Promise<Department[]>{
     return this.departmentService.getDepartments(take,skip);
   }
-  @NoAuth()
   @Get()
   getAllDepartments():Promise<Department[]>{
     return this.departmentService.getAllDepartments();
   }
-  @NoAuth()
+  
   @Patch('/:id')
   updateDepartment(@Param('id') id:number,@Body() updateDepartmentDto:UpdateDepartmentDto):Promise<Department>{
     return this.departmentService.updateDepartment(id,updateDepartmentDto);

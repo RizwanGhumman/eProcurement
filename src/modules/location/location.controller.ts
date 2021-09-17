@@ -15,8 +15,8 @@ import { LocationService } from './location.service';
 export class LocationController {
   constructor(private readonly locationService: LocationService) {}
 
-  // @Roles(UserRole.ADMIN)
-  // @UseGuards(JwtAuthGuard,RolesGuard)
+  //@Roles(UserRole.ADMIN)
+  //@UseGuards(JwtAuthGuard,RolesGuard)
   @Get('/:take/:skip')
   getLocations(@Param('take') take:number,@Param('skip') skip:number):Promise<Location[]>{
     return this.locationService.getLocations(take,skip);
