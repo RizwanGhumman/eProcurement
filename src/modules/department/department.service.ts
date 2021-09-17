@@ -46,7 +46,6 @@ export class DepartmentService {
                 if(index!==-1){
                     const location = await this.locationService.findById(updateDepartmentDto.locationId)
                     department.locationId = location.id;
-                    // delete updateDepartmentDto.locationId
                     keys.splice(index,1)
                 }
                 
@@ -81,7 +80,7 @@ export class DepartmentService {
             return await this.departmentRepo.save(department);
         }
         catch(error){
-           // console.log(error.message.includes('duplicate'));
+           
             let msg="An Error Occured please try again";
             if (error.message.includes('duplicate')){
                 msg="Department is already exist at this location";

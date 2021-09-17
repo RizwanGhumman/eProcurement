@@ -22,14 +22,20 @@ export class PurchaseRequestItem extends BaseEntity{
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @OneToOne(()=>BidItem,bid_item=>bid_item.purchase_req_item)
+    @OneToOne(()=>BidItem,bid_item=>bid_item.purchase_req_item,{
+        lazy:true
+    })
     @JoinColumn()
     bid_item:BidItem
 
-    @ManyToOne(()=>Item,item=>item.purchase_req_items)
+    @ManyToOne(()=>Item,item=>item.purchase_req_items,{
+        lazy:true
+    })
     item:Item
 
-    @ManyToOne(()=>PurchaseRequest,pr_req=>pr_req.purchase_req_items)
+    @ManyToOne(()=>PurchaseRequest,pr_req=>pr_req.purchase_req_items,{
+        lazy:true
+    })
     purchase_req:PurchaseRequest
 
 } 

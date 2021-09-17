@@ -25,6 +25,8 @@ export class Item extends BaseEntity{
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @OneToMany(()=>PurchaseRequestItem,pr_req_item=>pr_req_item.item)
+    @OneToMany(()=>PurchaseRequestItem,pr_req_item=>pr_req_item.item,{
+        lazy:true
+    })
     purchase_req_items:PurchaseRequestItem[]
 }
