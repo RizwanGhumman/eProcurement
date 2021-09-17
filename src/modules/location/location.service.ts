@@ -40,7 +40,7 @@ export class LocationService {
         return await this.locationRepo.find({where:{
             name:Like(`%${q}%`)
         }})
-
+        
     }
 
 

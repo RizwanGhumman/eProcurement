@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post, Query, Request, UseGuards } 
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../auth/decorator/roles.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { NoAuth } from '../auth/guards/no-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { UserRole } from '../users/enum/user-role.entity';
 import { LocationDto } from './dto/location.dto';
@@ -14,8 +15,8 @@ import { LocationService } from './location.service';
 export class LocationController {
   constructor(private readonly locationService: LocationService) {}
 
-  @Roles(UserRole.ADMIN)
-  @UseGuards(JwtAuthGuard,RolesGuard)
+  //@Roles(UserRole.ADMIN)
+  //@UseGuards(JwtAuthGuard,RolesGuard)
   @Get('/:take/:skip')
   getLocations(@Param('take') take:number,@Param('skip') skip:number):Promise<Location[]>{
     return this.locationService.getLocations(take,skip);
@@ -25,7 +26,6 @@ export class LocationController {
   getAllLocations():Promise<Location[]>{
     return this.locationService.getAllLocations();
   }
-
   @Post()
   createLocation(@Body() locationDto:LocationDto):Promise<Location>{
     return this.locationService.createLocation(locationDto);
